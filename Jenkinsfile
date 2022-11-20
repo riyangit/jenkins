@@ -1,52 +1,33 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'hh'
+    }
+
+  }
   stages {
-    stage('Build') {
-      steps {
-        sh '''ls
+    stage('df') {
+      parallel {
+        stage('df') {
+          steps {
+            timestamps() {
+              sh 'ls'
+            }
 
+          }
+        }
 
+        stage('test') {
+          steps {
+            git(url: 'https://github.com/riyangit/jenkins/tree/main', branch: 'd')
+          }
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-        echo 'i want build'
       }
     }
 
-    stage('test') {
-      steps {
-        echo 'deploy'
-      }
-    }
-
+  }
+  environment {
+    hh = '66'
   }
 }
